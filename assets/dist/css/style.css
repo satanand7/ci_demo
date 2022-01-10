@@ -1,0 +1,31 @@
+
+
+.post-privacy-Dropdown-menu input[type=radio]{
+    display: none;
+}
+
+
+.post-privacy-Dropdown-menu input[type=radio]:checked+label>.fa-check{
+    opacity: 1;
+}
+.post-privacy-Dropdown-menu li{
+    padding-left: 10px;
+}
+
+.post-privacy-Dropdown-menu .fa-check{
+    opacity: 0;
+}
+
+.post-privacy-Dropdown-menu p{
+    font-weight: normal;
+    line-height: 10px;
+    font-size: 10px;
+    padding-left: 20px;
+}
+
+.gallery img{
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
