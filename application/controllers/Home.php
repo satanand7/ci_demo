@@ -23,7 +23,24 @@ class Home extends CI_Controller{
 
     public function showPostImages($post_id){
         $data["post_images"] = $this->Post_images->getPostImages($post_id);
+        // echo "<pre>";
+        // var_dump($data["post_images"]);
         $this->load->view("includes/post_images",$data);
+    }
+
+
+    function showPostCount($post_id){
+        $likeParam = array(
+            "user_id"=>$this->session->userdata("id"),
+            "post_id"=>$post_id
+        ); 
+        $data["post_id"] = $post_id;
+        $checkLike = $this->Post_like->checkLike($likeParam);
+        $data["is_liked"] = $checkLike ? true : false;
+        $data["like_count"] = $this->Post_like->likeCount($post_id);
+        
+
+        $this->load->view("includes/post_count",$data);
     }
 
     function profile(){

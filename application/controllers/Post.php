@@ -23,7 +23,7 @@ class Post extends CI_Controller{
         );
         $post_id =$this->Post_model->insert($postParam);
         $files = $_FILES;
-        $nof = count($_FILES["files"]["name"]);
+        $nof =  $_FILES["files"]["name"][0] != "" ? count($_FILES["files"]["name"]):0;
         for ($i=0; $i < $nof; $i++) { 
             $_FILES['postfile']['name'] = $files["files"]["name"][$i];
             $_FILES['postfile']['type'] = $files["files"]["type"][$i];
@@ -68,6 +68,22 @@ class Post extends CI_Controller{
             $this->session->set_flashdata("error","Something went wrong.");
         }
         return redirect("home");
+    }
+
+
+    function likePost($post_id){
+        $likeParam = array(
+            "user_id"=>$this->session->userdata("id"),
+            "post_id"=>$post_id
+        ); 
+        $checkLike = $this->Post_like->checkLike($likeParam);
+        if($checkLike){
+            $this->Post_like->deleteLike($likeParam);    
+        }else{
+            $this->Post_like->insert($likeParam);
+        }
+        return redirect("home");
+
     }
 
 
