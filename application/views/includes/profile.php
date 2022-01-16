@@ -3,7 +3,7 @@
      <div class="box-body box-profile">
          <img class="profile-user-img img-responsive img-circle" src="<?= $this->session->userdata('profile_image') ? base_url('uploads/profile_images/') . $this->session->userdata("profile_image")   : base_url("assets/dist/img/user4-128x128.jpg") ?>" alt="User profile picture">
 
-         <h3 class="profile-username text-center">Nina Mcintire
+         <h3 class="profile-username text-center"><?=$this->session->userdata("first_name")?> <?=$this->session->userdata("last_name")?>
          </h3>
          <p class="text-center text-muted"><a class="text-center" href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
 

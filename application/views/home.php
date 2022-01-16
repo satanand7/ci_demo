@@ -23,7 +23,7 @@
             <!-- add post  -->
             <div class="post">
               <div class="user-block">
-                <img class="img-circle img-bordered-sm" src="<?= base_url("assets") ?>/dist/img/user1-128x128.jpg" alt="user image">
+                <img class="img-circle img-bordered-sm" src="<?=$this->session->userdata("profile_image")? base_url("uploads/profile_images/").$this->session->userdata("profile_image") :base_url("assets/dist/img/user1-128x128.jpg") ?>" alt="user image">
                 <span class="username">
                   <form action="<?= site_url("post/addPost") ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
@@ -123,8 +123,17 @@
               </p>
               <?=$controller->showPostImages($post["id"])?>
               
-              <?= $controller->showPostCount($post["id"])?>    
-              <input class="form-control input-sm" type="text" placeholder="Type a comment">
+              <?= $controller->showPostCount($post["id"])?>
+
+              <?=$controller->showPostComments($post["id"])?>
+              
+
+
+
+              <form action="<?=site_url("post/addCommentOnPost")?>" method="post">
+                  <input type="hidden" name="post_id" value="<?=$post["id"]?>">
+                  <input name="comment" class="form-control input-sm" type="text" placeholder="Type a comment">
+              </form>    
             </div>
                 
                 

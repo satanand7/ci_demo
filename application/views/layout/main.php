@@ -183,7 +183,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= $this->session->userdata("profile_image")? base_url("uploads/profile_images/").$this->session->userdata("profile_image") :base_url("assets/dist/img/user2-160x160.jpg")?>" class="user-image" alt="User Image">
-                <span class="hidden-xs">Alexander Pierce</span>
+                <span class="hidden-xs"><?=$this->session->userdata("first_name")?> <?=$this->session->userdata("last_name")?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -191,8 +191,8 @@
                   <img src="<?=$this->session->userdata("profile_image")? base_url("uploads/profile_images/").$this->session->userdata("profile_image") : base_url("assets/dist/img/user2-160x160.jpg")?>" class="img-circle" alt="User Image">
 
                   <p>
-                    Alexander Pierce
-                    <small>Member since Nov. 2012</small>
+                    <?=$this->session->userdata("first_name")?> <?=$this->session->userdata("last_name")?>
+                    <small>Member since <?=Date("M-Y",strtotime($this->session->userdata("created_at")))?></small>
                   </p>
                 </li>
                 <!-- Menu Body -->

@@ -35,6 +35,6 @@
         <a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Likes
             (<?=$like_count?>)</a>
         <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments
-            (5)</a>
+            (<?=$comment_count?>)</a>
     </li>
 </ul>

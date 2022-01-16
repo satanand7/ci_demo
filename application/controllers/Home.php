@@ -38,9 +38,17 @@ class Home extends CI_Controller{
         $checkLike = $this->Post_like->checkLike($likeParam);
         $data["is_liked"] = $checkLike ? true : false;
         $data["like_count"] = $this->Post_like->likeCount($post_id);
+        $data["comment_count"] = $this->Post_comment->getCommentCount($post_id);
         
 
         $this->load->view("includes/post_count",$data);
+    }
+
+
+    function showPostComments($post_id){
+        $data["post_comments"] = $this->Post_comment->getPostComment($post_id);
+            
+        $this->load->view("includes/post_comment",$data);
     }
 
     function profile(){

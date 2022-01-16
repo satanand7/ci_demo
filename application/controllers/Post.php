@@ -87,6 +87,40 @@ class Post extends CI_Controller{
     }
 
 
+    function addCommentOnPost(){
+        $post= $this->input->post();
+        if(!$post){
+            $this->session->set_flashdata("error","Invalid request.");
+            return redirect("home");
+        }
+        $this->form_validation->set_rules("post_id","Post Id","required");
+        $this->form_validation->set_rules("comment","Comment","required");
+
+        $this->form_validation->set_message("required","{field} is required.");
+        if($this->form_validation->run()===false){
+            $this->session->set_flashdata("error",validation_errors());
+            redirect("home");
+        }else{
+            $param = array(
+                "user_id"=>$this->session->userdata("id"),
+                "post_id"=>$post["post_id"],
+                "comment"=>$post["comment"]
+            );
+            $comment_id = $this->Post_comment->insert($param);
+            if($comment_id){
+                $this->session->set_flashdata("success","Your comment has been successfully saved.");
+                return redirect("home");
+            }else{
+                $this->session->set_flashdata("error","Something went wrong.");
+                return redirect("home");
+
+            }
+        }
+
+
+    }
+
+
 
 }
 
