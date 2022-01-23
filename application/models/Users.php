@@ -28,6 +28,22 @@ class Users extends CI_Model{
         return $this->db->where("id",$id)->update("users",$data);
     }
 
+    function searchUser($str = ""){
+        $this->db->select("users.*");
+        $this->db->select("fr1.status");
+        $this->db->select("fr1.to_user_id");
+        $this->db->select("fr1.from_user_id");
+        $this->db->where("users.id !=",$this->session->userdata("id"));
+        $this->db->group_start();
+        $this->db->like("first_name",$str);
+        $this->db->or_like("last_name",$str);
+        $this->db->or_like("email",$str);
+        $this->db->group_end();
+        $this->db->join("friend_request fr1","fr1.to_user_id= users.id","left");
+        // $this->db->join("friend_request fr1","fr1.from_user_id= users.id");
+        return $this->db->get("users")->result_array();
+    }
+
 
 
 }

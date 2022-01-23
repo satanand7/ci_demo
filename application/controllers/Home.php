@@ -130,6 +130,34 @@ class Home extends CI_Controller{
     }
 
 
+    function searchUser(){
+        $str = $this->input->get("query");
+        $data["query"]=$str;
+        $data["users"]=$this->Users->searchUser($str);
+        // echo "<pre>";
+        // var_dump($data["users"]);die;   
+        $data['_view']="userSearch";
+        $this->load->view("layout/main",$data);
+    }   
+    
+    function addNewFriend($to_user_id=""){
+        if($to_user_id==""){
+            return redirect("home");
+        }
+        $array= array(
+            "from_user_id"=>$this->session->userdata("id"),
+            "to_user_id"=>$to_user_id,
+        );
+        $id = $this->Friend_request->sendRequest($array);
+        if($id){
+            $this->session->set_flashdata("success","Friend reqest has been send to user");
+        }else{
+            $this->session->set_flashdata("error","Something went wrong");
+        }
+        return redirect("home");
+    }
+
+
     function logout(){
         $this->session->sess_destroy();
         return redirect("auth/login");

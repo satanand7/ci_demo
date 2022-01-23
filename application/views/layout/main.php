@@ -50,9 +50,9 @@
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
-        <form class="navbar-form navbar-left" role="search">
+        <form action="<?=site_url("home/searchUser")?>" class="navbar-form navbar-left" role="search" method="get">
           <div class="form-group">
-            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search any thing...">
+            <input type="text" name="query" class="form-control" id="navbar-search-input" placeholder="Search any thing...">
           </div>
         </form>
 
